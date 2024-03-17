@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer to Peer Interactions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light gray background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow: hidden;
+            flex-direction: column;
+            position: relative;
+            height: 90%;
+        }
+        .welcome-message {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 2em;
+            color: #007bff; /* Blue color */
+        }
+        .contacts {
+            padding: 20px;
+            border-right: 2px solid #e0e0e0; /* Light gray border */
+            overflow-y: auto;
+            width: 30%;
+            height: 100%;
+        }
+        .contacts h2 {
+            margin-top: 0;
+            padding-top: 0;
+            color: #007bff; /* Blue color */
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .contact {
+            padding: 15px 0;
+            border-bottom: 2px solid #e0e0e0; /* Light gray border */
+            color: #333;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        .contact:last-child {
+            border-bottom: none;
+        }
+        .contact:hover {
+            background-color: #f5f5f5; /* Light gray background color on hover */
+        }
+        .chat {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .chat h2 {
+            margin-top: 0;
+            padding-top: 0;
+            color: #007bff; /* Blue color */
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .message {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f5f5f5; /* Light gray background color */
+            border-radius: 12px;
+            color: #333;
+            font-size: 1.2em;
+        }
+        .sender {
+            font-weight: bold;
+        }
+        .message-time {
+            font-size: 1em;
+            color: #888;
+        }
+        .chat-box {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            border-top: 2px solid #e0e0e0; /* Light gray border */
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0; /* Light gray border */
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1.2em;
+        }
+        input[type="submit"] {
+            background-color: #007bff; /* Blue color */
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+            }
+            .contacts {
+color:blue;
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0; /* Light gray border */
+                height: auto;
+            }
+            .chat {
+                width: 100%;
+                height: auto;
+            }
+            .chat-box {
+                position: fixed;
+                width: 100%;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-message">Welcome To Peer to Peer Interactions!</div>
+        <div class="contacts">
+            <h2>Contacts</h2>
+            <div class="contact" onclick="showChat('contact1')">Contact 1</div>
+            <div class="contact" onclick="showChat('contact2')">Contact 2</div>
+            <div class="contact" onclick="showChat('contact3')">Contact 3</div>
+            <div class="contact" onclick="showChat('contact4')">Contact 4</div>
+            <div class="contact" onclick="showChat('contact5')">Contact 5</div>
+            <div class="contact" onclick="showChat('contact6')">Contact 6</div>
+            <div class="contact" onclick="showChat('contact7')">Contact 7</div>
+            <div class="contact" onclick="showChat('contact8')">Contact 8</div>
+            <div class="contact" onclick="showChat('contact9')">Contact 9</div>
+            <div class="contact" onclick="showChat('contact10')">Contact 10</div>
+        </div>
+        <div class="chat">
+            <h2>Chat</h2>
+            <div class="chat-box" id="contact1">
+                <!-- Chat box for Contact 1 -->
+                <div class="message">Hi there!</div>
+            </div>
+            <!-- Add more chat boxes for other contacts as needed -->
+        </div>
+        <div class="chat-box">
+            <div class="input-container">
+                <input type="text" placeholder="Type a message...">
+                <input type="submit" value="Send">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showChat(contactId) {
+            var welcomeMessage = document.querySelector('.welcome-message');
+            welcomeMessage.style.display = 'none';
+           
+            var contacts = document.querySelector('.contacts');
+            var chat = document.querySelector('.chat');
+            contacts.style.display = 'block';
+            chat.style.display = 'block';
+           
+            var chatBoxes = document.querySelectorAll('.chat-box');
+            chatBoxes.forEach(function(box) {
+                box.style.display = 'none';
+            });
+            var chatBox = document.getElementById(contactId);
+    if (chatBox) {
+        chatBox.style.display = 'block';
+    }
+}
+    </script>
+    </body>
+</html>
